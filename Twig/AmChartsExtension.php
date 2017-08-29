@@ -1,16 +1,18 @@
 <?php
 namespace IK\AmChartsBundle\Twig;
 
+use IK\AmChartsBundle\Charts\ChartInterface;
+
 class AmChartsExtension extends \Twig_Extension
 {
     public function getFunctions()
     {
         return array(
-            'amchart' => new \Twig_Function_Method($this, 'renderAmChart', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('amchartt', array($this, 'renderAmChart'), array('is_safe' => array('html'))),
         );
     }
 
-    public function renderAmChart($chart)
+    public function renderAmChart( ChartInterface $chart)
     {
         return $chart->render();
     }

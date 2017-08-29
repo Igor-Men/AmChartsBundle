@@ -19,5 +19,5 @@
             "IK\\AmChartsBundle": ""
         }
     },
-    "target-dir": "RC/AmChartsBundle",
+    "target-dir": "IK/AmChartsBundle"
 }
