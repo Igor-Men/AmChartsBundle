@@ -1,0 +1,8 @@
+parameters:
+  ik_amcharts.twig_extension.class: IK\AmChartsBundle\Twig\AmChartsExtension
+
+services:
+  ik_amcharts.twig.amcharts_extension:
+    class: %ik_amcharts.twig_extension.class%
+    tags:
+        - { name: twig.extension }
