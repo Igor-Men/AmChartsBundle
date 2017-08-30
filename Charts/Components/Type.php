@@ -19,16 +19,13 @@ class Type
         $this->type = $type;
     }
 
-    /**
-     * @param mixed $collection
-     */
-    public function setCollection($collection)
-    {
-        $this->collection = $collection;
+    public function __construct($type = '') {
+        $this->type = $type;
     }
 
     public function __toString()
     {
-        return '"'.(new \ReflectionClass($this))->getShortName().'" '.$this->type;
+        return $this->type;
+//        return '"'.(new \ReflectionClass($this))->getShortName().'" '.$this->type;
     }
 }
