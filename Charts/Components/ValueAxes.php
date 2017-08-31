@@ -9,14 +9,25 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class ValueAxes {
 
+    public $valueAxes;
 
     public function __construct( Array $valueAxes) {
-        //create subObjects;
-        return '';
+        $this->valueAxes = new ArrayCollection();
+        foreach ($valueAxes as $valueAxe) {
+            $objectValueAxe = new ValueAxe($valueAxe);
+            $this->addValueAxe($objectValueAxe);
+        }
     }
-//    function __toString() {
-//        return $this->theme;
-//    }
+    public function addValueAxe(ValueAxe $objectValueAxe) {
+        $this->valueAxes->set($objectValueAxe->getId(), $objectValueAxe);
+    }
+
+    public function getValueAxe($id) {
+        return isset($this->valueAxes[$id]) ? $this->valueAxes[$id] : null;
+    }
+
 }

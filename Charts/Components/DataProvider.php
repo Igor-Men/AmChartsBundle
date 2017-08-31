@@ -11,4 +11,10 @@ namespace IK\AmChartsBundle\Charts\Components;
 
 class DataProvider {
 
+    public $data;
+
+    public function __construct($dataArr) {
+        $this->data = $dataArr;
+    }
+
 }

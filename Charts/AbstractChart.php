@@ -13,8 +13,6 @@ use Symfony\Component\Intl\Exception\NotImplementedException;
 
 abstract class AbstractChart implements ChartInterface, \JsonSerializable {
 
-    protected $jsonSettings;
-
     public function jsonSerialize()
     {
         return $this->getDefaultJs();

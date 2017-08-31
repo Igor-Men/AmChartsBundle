@@ -14,7 +14,4 @@ class Theme {
     public function __construct($theme) {
         $this->theme = $theme;
     }
-    function __toString() {
-        return $this->theme;
-    }
 }

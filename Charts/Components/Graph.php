@@ -9,15 +9,20 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class ValueAxe {
+class Graph {
 
     public $id;
+    public $valueAxis;
+    public $lineColor;
+    public $fillColors;
+    public $fillAlphas;
+    public $type;
     public $title;
-    public $position;
-    public $autoGridCount;
-    public $labelFunction;
-
-    public $gridAlpha;
+    public $valueField;
+    public $clustered;
+    public $columnWidth;
+    public $legendValueText;
+    public $balloonText;
 
     public function __construct($strValueAxe) {
         foreach ($strValueAxe as $property => $value) {
@@ -35,6 +40,4 @@ class ValueAxe {
     {
         return $this->id;
     }
-
-
 }

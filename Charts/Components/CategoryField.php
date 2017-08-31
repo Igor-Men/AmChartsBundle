@@ -10,5 +10,9 @@ namespace IK\AmChartsBundle\Charts\Components;
 
 
 class CategoryField {
+    public $categoryField;
+    public function __construct($categoryField) {
+        $this->categoryField = $categoryField;
+    }
 
 }
