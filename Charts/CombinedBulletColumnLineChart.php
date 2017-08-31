@@ -44,8 +44,6 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
         },$js);
 
         $objStd = json_decode($js);
-//        print_r($objStd);
-//        exit;
         if (!$objStd) {
             return false;
         }
@@ -63,9 +61,6 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
        return true;
     }
 
-
-
-
     protected function getDefaultJs(){
        $js =  $this->chartDefaultData->getDefaultJs();
         $js = preg_replace_callback("/(function[^\}]*?)(\})/m", function($matches){
@@ -80,9 +75,24 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
         return $this->chartDefaultData->getDefaultDiv();
     }
 
-    public function setDefaultSettings(){
-        // setim is json,a
+    public function jsonSerialize(){
+        return
+            json_encode([
+                'type' => $this->type,
+                'theme' => $this->theme,
+                'dataDateFormat' => $this->dataDateFormat,
+                'precision' => $this->precision,
+                'valueAxes' => $this->valueAxes,
+
+                'graphs' => $this->graphs,
+                'chartScrollbar' => $this->chartScrollbar,
+                'chartCursor' => $this->chartCursor,
+                'categoryField' => $this->categoryField,
+                'categoryAxis' => $this->categoryAxis,
+                'legend' => $this->legend,
+                'balloon' => $this->balloon,
+                'export' => $this->export,
+                'dataProvider' => $this->dataProvider->data,
+            ]);
     }
-
-
 }

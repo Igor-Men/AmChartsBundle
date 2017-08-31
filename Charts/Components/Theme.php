@@ -9,9 +9,13 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class Theme {
+class Theme implements \JsonSerializable {
     public $theme;
     public function __construct($theme) {
         $this->theme = $theme;
+    }
+
+    public function jsonSerialize() {
+        return $this->theme;
     }
 }

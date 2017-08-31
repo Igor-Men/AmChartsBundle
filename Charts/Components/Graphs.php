@@ -11,7 +11,7 @@ namespace IK\AmChartsBundle\Charts\Components;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Graphs {
+class Graphs implements \JsonSerializable {
 
     public $graphs;
 
@@ -23,11 +23,13 @@ class Graphs {
         }
     }
     public function addGraph(Graph $objectGraph) {
-        $this->graphs->set($objectGraph->getId(), $objectGraph);
+        $this->graphs->add($objectGraph);
     }
 
     public function getGraph($id) {
         return isset($this->graphs[$id]) ? $this->graphs[$id] : null;
     }
-
+    public function jsonSerialize() {
+        return $this->graphs->toArray();
+    }
 }

@@ -15,7 +15,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
 
     public function jsonSerialize()
     {
-        return $this->getDefaultJs();
+        throw new NotImplementedException();
     }
 
     protected function buildChart(){
@@ -39,15 +39,24 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     {
         return "});\n";
     }
-
+    protected function cleanUpFunctionMethod($strJs) {
+        //return $strJs;
+        $unescepedJsFunctions = preg_replace_callback("/(\">>>)(.*?)(\<\<\<\")/i", function($matches){
+            $str_inner = $matches[2];
+            return str_replace("\\\"", "\"", $str_inner);
+        },$strJs);
+        return $unescepedJsFunctions;
+    }
     public function render()
     {
+        $sctipt_string = $this->cleanUpFunctionMethod($this->jsonSerialize());
+
         $chartJS = $this->renderStartIIFE();
 
         $chartJS .= "    var " . $this->type . "chart = new AmCharts.makeChart(\"" . $this->getDefaultDiv() . "\",";
 
 //        $chartJS .= json_encode($this, JSON_PRETTY_PRINT);
-        $chartJS .= $this->jsonSerialize();
+        $chartJS .= $sctipt_string;
 
         $chartJS .= ");\n";
 

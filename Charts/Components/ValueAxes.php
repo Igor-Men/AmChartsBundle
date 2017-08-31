@@ -11,7 +11,7 @@ namespace IK\AmChartsBundle\Charts\Components;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class ValueAxes {
+class ValueAxes implements \JsonSerializable {
 
     public $valueAxes;
 
@@ -23,11 +23,14 @@ class ValueAxes {
         }
     }
     public function addValueAxe(ValueAxe $objectValueAxe) {
-        $this->valueAxes->set($objectValueAxe->getId(), $objectValueAxe);
+        $this->valueAxes->add($objectValueAxe);
     }
 
-    public function getValueAxe($id) {
-        return isset($this->valueAxes[$id]) ? $this->valueAxes[$id] : null;
-    }
+//    public function getValueAxe($id) {
+//        return isset($this->valueAxes[$id]) ? $this->valueAxes[$id] : null;
+//    }
 
+    public function jsonSerialize() {
+        return $this->valueAxes->toArray();
+    }
 }

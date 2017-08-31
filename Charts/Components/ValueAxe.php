@@ -9,12 +9,13 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class ValueAxe {
+class ValueAxe implements  \JsonSerializable {
 
     public $id;
     public $title;
     public $position;
     public $autoGridCount;
+
     public $labelFunction;
 
     public $gridAlpha;
@@ -36,5 +37,18 @@ class ValueAxe {
         return $this->id;
     }
 
-
+    public function jsonSerialize() {
+        $arr = [];
+        $arr['id'] = $this->id;
+        $arr['title'] = $this->title;
+        $arr['position'] = $this->position;
+        $arr['autoGridCount'] = $this->autoGridCount;
+        if ($this->labelFunction !== null) {
+            $arr['labelFunction'] = $this->labelFunction;
+        }
+        if ($this->gridAlpha !== null) {
+            $arr['gridAlpha'] = $this->gridAlpha;
+        }
+        return $arr;
+    }
 }

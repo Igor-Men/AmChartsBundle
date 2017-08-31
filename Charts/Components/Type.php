@@ -2,7 +2,7 @@
 
 namespace IK\AmChartsBundle\Charts\Components;
 
-class Type
+class Type implements \JsonSerializable
 {
     /**
      * @var String
@@ -21,6 +21,10 @@ class Type
 
     public function __construct($type = '') {
         $this->type = $type;
+    }
+
+    public function jsonSerialize() {
+        return $this->type;
     }
 
     public function __toString()

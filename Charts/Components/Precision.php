@@ -9,7 +9,7 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class Precision {
+class Precision implements \JsonSerializable {
     public $precision;
     public function __construct($precision) {
         $this->precision = $precision;
@@ -17,4 +17,8 @@ class Precision {
     function __toString() {
         return $this->precision;
     }
+    public function jsonSerialize() {
+        return $this->precision;
+    }
+
 }

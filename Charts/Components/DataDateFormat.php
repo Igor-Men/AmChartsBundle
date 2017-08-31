@@ -9,12 +9,16 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class DataDateFormat {
+class DataDateFormat implements \JsonSerializable {
     public $dataDateFormat;
     public function __construct($dataDateFormat) {
         $this->dataDateFormat = $dataDateFormat;
     }
     function __toString() {
+        return $this->dataDateFormat;
+    }
+
+    public function jsonSerialize() {
         return $this->dataDateFormat;
     }
 }
