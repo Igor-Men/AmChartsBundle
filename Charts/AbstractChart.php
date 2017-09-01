@@ -22,10 +22,6 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         throw new NotImplementedException();
     }
 
-    protected function getDefaultDiv(){
-        throw new NotImplementedException();
-    }
-
     protected function renderStartIIFE()
     {
         return "$(function () {\n";
@@ -44,6 +40,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         },$strJs);
         return $unescepedJsFunctions;
     }
+
     public function render()
     {
         $sctipt_string = $this->cleanUpFunctionMethod($this->jsonSerialize());

@@ -1,3 +1,22 @@
+
+$anotherGraphDataArr = [
+    [
+        'active' => 5,
+        'reg' => 9,
+        'day' => '2017-06-01'
+    ],[
+        'active' => 5,
+        'reg' => 9,
+        'day' => '2017-06-02'
+    ],[
+        'active' => 5,
+        'reg' => 9,
+        'day' => '2017-06-03'
+    ],
+    ......
+];
+
+//convert for dataProvider, but you free change source columns with settings directly in chart object.
 $preperadArr = [];
 foreach ($anotherGraphDataArr as $item) {
     $arrItem = [];
@@ -15,20 +34,23 @@ $column1Graphs = $chart->getGraphs();
 
 //lines
 $graphLine1 = $column1Graphs->getGraphByDataColumn('line1');
-$graphLine1->setTitle('Проценты');
+$graphLine1->setTitle('Percents');
 
 $valueAxe = $chart->getValueAxes()->getValueAxeByGraph($graphLine1);
-$valueAxe->setTitle('Проценты');
+$valueAxe->setTitle('Percents');
 $valueAxe->setLabelFunction('function(value){return "% " + Math.round( value ) }');
+
 //columns
 $graphColumn1 = $column1Graphs->getGraphByDataColumn('column1');
-$graphColumn1->setTitle('Активные');
+$graphColumn1->setTitle('Active');
 
 $graphColumn2 = $column1Graphs->getGraphByDataColumn('column2');
-$graphColumn2->setTitle('Регистрации');
+$graphColumn2->setTitle('Registrations');
 
 $valueAxe = $chart->getValueAxes()->getValueAxeByGraph($graphColumn1);
 $valueAxe->setTitle('some name');
+
 $valueAxe->setLabelFunction('function(value){return Math.round(value) + "M" }');
 
 $chart->setDataProvider($dataProvider);
+

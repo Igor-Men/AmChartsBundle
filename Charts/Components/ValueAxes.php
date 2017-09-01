@@ -26,7 +26,6 @@ class ValueAxes implements \JsonSerializable {
         $this->valueAxes->set($objectValueAxe->getId(), $objectValueAxe);
     }
 
-
     public function getValueAxe($id) {
         return isset($this->valueAxes[$id]) ? $this->valueAxes[$id] : null;
     }

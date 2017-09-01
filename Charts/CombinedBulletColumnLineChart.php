@@ -69,6 +69,7 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
         if (!$objStd) {
             return false;
         }
+
         $nameSpaceComponents = 'IK\AmChartsBundle\Charts\Components\\';
         foreach($objStd as $key => $value){
             $className = $nameSpaceComponents.''.ucfirst($key);

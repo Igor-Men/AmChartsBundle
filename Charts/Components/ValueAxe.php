@@ -82,7 +82,7 @@ class ValueAxe implements  \JsonSerializable {
     {
         $labelFunction = str_replace('\"','\\\"',$labelFunction);
         $result =  ">>>$labelFunction<<<";
-        $this->labelFunction =$result;
+        $this->labelFunction = $result;
     }
 
 }
