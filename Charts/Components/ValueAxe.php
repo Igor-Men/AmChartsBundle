@@ -20,7 +20,7 @@ class ValueAxe implements  \JsonSerializable {
 
     public $gridAlpha;
 
-    public function __construct($strValueAxe) {
+    public function __construct($strValueAxe = []) {
         foreach ($strValueAxe as $property => $value) {
             if (property_exists($this, $property)) {
                 $this->{$property} = $value;
@@ -32,23 +32,57 @@ class ValueAxe implements  \JsonSerializable {
     {
         $this->id = $id;
     }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    public function jsonSerialize() {
+    public function getData(){
         $arr = [];
-        $arr['id'] = $this->id;
-        $arr['title'] = $this->title;
-        $arr['position'] = $this->position;
-        $arr['autoGridCount'] = $this->autoGridCount;
-        if ($this->labelFunction !== null) {
-            $arr['labelFunction'] = $this->labelFunction;
+        foreach(get_object_vars($this) as $name => $value) {
+            if ($value !== null) {
+                $arr[$name] = $value;
+            }
         }
-        if ($this->gridAlpha !== null) {
-            $arr['gridAlpha'] = $this->gridAlpha;
+        return (object)$arr;
+    }
+
+    public function jsonSerialize() {
+
+        $arr = [];
+        foreach(get_object_vars($this) as $name => $value) {
+            if ($value !== null) {
+                $arr[$name] = $value;
+            }
         }
         return $arr;
     }
+
+    public function getLabelFunction()
+    {
+        $js = $this->labelFunction;
+        if (!$js) {
+            return '';
+        }
+        $js = preg_replace_callback("/(>>>)(.*?)(\<\<\<)/i", function($matches){
+            $str_inner = $matches[2];
+            $str_inner =  str_replace("\\\"", "\"", $str_inner);
+            return $str_inner;
+        },$js);
+        return $js;
+    }
+
+    public function setLabelFunction($labelFunction)
+    {
+        $labelFunction = str_replace('\"','\\\"',$labelFunction);
+        $result =  ">>>$labelFunction<<<";
+        $this->labelFunction =$result;
+    }
+
 }

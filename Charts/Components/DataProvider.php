@@ -14,7 +14,11 @@ class DataProvider {
     public $data;
 
     public function __construct($dataArr) {
-        $this->data = $dataArr;
+        $arr = [];
+        foreach($dataArr as $element) {
+            $arr[] = (object)$element;
+        }
+        $this->data = $arr;
     }
 
 }

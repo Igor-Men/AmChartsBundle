@@ -17,7 +17,7 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                   "precision": 2,
                   "valueAxes": [{
                     "id": "v1",
-                    "title": "Sales",
+                    "title": "Lines",
                     "position": "left",
                     "autoGridCount": false,
                     "labelFunction": function(value) {
@@ -25,7 +25,7 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                     }
                   }, {
                     "id": "v2",
-                    "title": "Market Days",
+                    "title": "Columns",
                     "gridAlpha": 0,
                     "position": "right",
                     "autoGridCount": false
@@ -37,8 +37,8 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                     "fillColors": "#e1ede9",
                     "fillAlphas": 1,
                     "type": "column",
-                    "title": "Actual Sales",
-                    "valueField": "sales2",
+                    "title": "column2 Sales",
+                    "valueField": "column2",
                     "clustered": false,
                     "columnWidth": 0.5,
                     "legendValueText": "$[[value]]M",
@@ -50,8 +50,8 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                     "fillColors": "#62cf73",
                     "fillAlphas": 1,
                     "type": "column",
-                    "title": "Target Sales",
-                    "valueField": "sales1",
+                    "title": "column1 Sales",
+                    "valueField": "column1",
                     "clustered": false,
                     "columnWidth": 0.3,
                     "legendValueText": "$[[value]]M",
@@ -67,9 +67,9 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                     "lineThickness": 2,
                     "lineColor": "#20acd4",
                     "type": "smoothedLine",
-                    "title": "Market Days",
+                    "title": "line1 line",
                     "useLineColorForBulletBorder": true,
-                    "valueField": "market1",
+                    "valueField": "line1",
                     "balloonText": "[[title]]<br /><b style=\'font-size: 130%\'>[[value]]</b>"
                   }, {
                     "id": "g2",
@@ -83,9 +83,9 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                     "lineColor": "#e1ede9",
                     "type": "smoothedLine",
                     "dashLength": 5,
-                    "title": "Market Days ALL",
+                    "title": "line2 Days",
                     "useLineColorForBulletBorder": true,
-                    "valueField": "market2",
+                    "valueField": "line2",
                     "balloonText": "[[title]]<br /><b style=\'font-size: 130%\'>[[value]]</b>"
                   }],
                   "chartScrollbar": {
@@ -129,94 +129,94 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                   },
                   "dataProvider": [{
                     "date": "2013-01-16",
-                    "market1": 71,
-                    "market2": 75,
-                    "sales1": 5,
-                    "sales2": 8
+                    "line1": 71,
+                    "line2": 75,
+                    "column1": 5,
+                    "column2": 8
                   }, {
                     "date": "2013-01-17",
-                    "market1": 74,
-                    "market2": 78,
-                    "sales1": 4,
-                    "sales2": 6
+                    "line1": 74,
+                    "line2": 78,
+                    "column1": 4,
+                    "column2": 6
                   }, {
                     "date": "2013-01-18",
-                    "market1": 78,
-                    "market2": 88,
-                    "sales1": 5,
-                    "sales2": 2
+                    "line1": 78,
+                    "line2": 88,
+                    "column1": 5,
+                    "column2": 2
                   }, {
                     "date": "2013-01-19",
-                    "market1": 85,
-                    "market2": 89,
-                    "sales1": 8,
-                    "sales2": 9
+                    "line1": 85,
+                    "line2": 89,
+                    "column1": 8,
+                    "column2": 9
                   }, {
                     "date": "2013-01-20",
-                    "market1": 82,
-                    "market2": 89,
-                    "sales1": 9,
-                    "sales2": 6
+                    "line1": 82,
+                    "line2": 89,
+                    "column1": 9,
+                    "column2": 6
                   }, {
                     "date": "2013-01-21",
-                    "market1": 83,
-                    "market2": 85,
-                    "sales1": 3,
-                    "sales2": 5
+                    "line1": 83,
+                    "line2": 85,
+                    "column1": 3,
+                    "column2": 5
                   }, {
                     "date": "2013-01-22",
-                    "market1": 88,
-                    "market2": 92,
-                    "sales1": 5,
-                    "sales2": 7
+                    "line1": 88,
+                    "line2": 92,
+                    "column1": 5,
+                    "column2": 7
                   }, {
                     "date": "2013-01-23",
-                    "market1": 85,
-                    "market2": 90,
-                    "sales1": 7,
-                    "sales2": 6
+                    "line1": 85,
+                    "line2": 90,
+                    "column1": 7,
+                    "column2": 6
                   }, {
                     "date": "2013-01-24",
-                    "market1": 85,
-                    "market2": 91,
-                    "sales1": 9,
-                    "sales2": 5
+                    "line1": 85,
+                    "line2": 91,
+                    "column1": 9,
+                    "column2": 5
                   }, {
                     "date": "2013-01-25",
-                    "market1": 80,
-                    "market2": 84,
-                    "sales1": 5,
-                    "sales2": 8
+                    "line1": 80,
+                    "line2": 84,
+                    "column1": 5,
+                    "column2": 8
                   }, {
                     "date": "2013-01-26",
-                    "market1": 87,
-                    "market2": 92,
-                    "sales1": 4,
-                    "sales2": 8
+                    "line1": 87,
+                    "line2": 92,
+                    "column1": 4,
+                    "column2": 8
                   }, {
                     "date": "2013-01-27",
-                    "market1": 84,
-                    "market2": 87,
-                    "sales1": 3,
-                    "sales2": 4
+                    "line1": 84,
+                    "line2": 87,
+                    "column1": 3,
+                    "column2": 4
                   }, {
                     "date": "2013-01-28",
-                    "market1": 83,
-                    "market2": 88,
-                    "sales1": 5,
-                    "sales2": 7
+                    "line1": 83,
+                    "line2": 88,
+                    "column1": 5,
+                    "column2": 7
                   }, {
                     "date": "2013-01-29",
-                    "market1": 84,
-                    "market2": 87,
-                    "sales1": 5,
-                    "sales2": 8
+                    "line1": 84,
+                    "line2": 87,
+                    "column1": 5,
+                    "column2": 8
                   }, {
                     "date": "2013-01-30",
-                    "market1": 81,
-                    "market2": 85,
-                    "sales1": 4,
-                    "sales2": 7
+                    "line1": 81,
+                    "line2": 85,
+                    "column1": 4,
+                    "column2": 7
                   }]
             }
         ';

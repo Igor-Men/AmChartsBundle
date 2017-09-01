@@ -23,14 +23,31 @@ class ValueAxes implements \JsonSerializable {
         }
     }
     public function addValueAxe(ValueAxe $objectValueAxe) {
-        $this->valueAxes->add($objectValueAxe);
+        $this->valueAxes->set($objectValueAxe->getId(), $objectValueAxe);
     }
 
-//    public function getValueAxe($id) {
-//        return isset($this->valueAxes[$id]) ? $this->valueAxes[$id] : null;
-//    }
+
+    public function getValueAxe($id) {
+        return isset($this->valueAxes[$id]) ? $this->valueAxes[$id] : null;
+    }
+
+    /**
+     * @param Graph $graph
+     * @return ValueAxe
+     */
+    public function getValueAxeByGraph(Graph $graph) {
+        $idAxe = $graph->getValueAxis();
+        $result = $this->valueAxes->filter(function(ValueAxe $entry) use ($idAxe) {
+            return $entry->getId() == $idAxe;
+        });
+        return $result->first();
+    }
 
     public function jsonSerialize() {
-        return $this->valueAxes->toArray();
+        $arr = [];
+        foreach($this->valueAxes as $object){
+            $arr[] = $object->getData();
+        }
+        return $arr;
     }
 }

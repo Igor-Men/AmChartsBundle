@@ -1,0 +1,34 @@
+$preperadArr = [];
+foreach ($anotherGraphDataArr as $item) {
+    $arrItem = [];
+    $arrItem['column1'] = $item['active'];
+    $arrItem['column2'] = $item['reg'];
+    $arrItem['line1'] = (int)$item['active']/(int)$item['reg'];
+    $arrItem['date'] = $item['day'];
+    $preperadArr[] = $arrItem;
+}
+
+$dataProvider = new DataProvider($preperadArr);
+
+$chart = new CombinedBulletColumnLineChart();
+$column1Graphs = $chart->getGraphs();
+
+//lines
+$graphLine1 = $column1Graphs->getGraphByDataColumn('line1');
+$graphLine1->setTitle('Проценты');
+
+$valueAxe = $chart->getValueAxes()->getValueAxeByGraph($graphLine1);
+$valueAxe->setTitle('Проценты');
+$valueAxe->setLabelFunction('function(value){return "% " + Math.round( value ) }');
+//columns
+$graphColumn1 = $column1Graphs->getGraphByDataColumn('column1');
+$graphColumn1->setTitle('Активные');
+
+$graphColumn2 = $column1Graphs->getGraphByDataColumn('column2');
+$graphColumn2->setTitle('Регистрации');
+
+$valueAxe = $chart->getValueAxes()->getValueAxeByGraph($graphColumn1);
+$valueAxe->setTitle('some name');
+$valueAxe->setLabelFunction('function(value){return Math.round(value) + "M" }');
+
+$chart->setDataProvider($dataProvider);

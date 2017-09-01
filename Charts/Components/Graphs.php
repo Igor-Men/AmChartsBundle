@@ -29,7 +29,18 @@ class Graphs implements \JsonSerializable {
     public function getGraph($id) {
         return isset($this->graphs[$id]) ? $this->graphs[$id] : null;
     }
+    public function getGraphByDataColumn($columnName) {
+        $result = $this->graphs->filter(function($entry) use ($columnName) {
+            return $entry->getValueField() == $columnName;
+        });
+        return $result->first();
+    }
+
     public function jsonSerialize() {
-        return $this->graphs->toArray();
+        $arr = [];
+        foreach($this->graphs as $graph){
+            $arr[] = $graph->getData();
+        }
+        return $arr;
     }
 }

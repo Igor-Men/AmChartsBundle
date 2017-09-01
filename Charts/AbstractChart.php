@@ -26,10 +26,6 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         throw new NotImplementedException();
     }
 
-    protected function getDefaultJs(){
-        throw new NotImplementedException();
-    }
-
     protected function renderStartIIFE()
     {
         return "$(function () {\n";
@@ -43,7 +39,8 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         //return $strJs;
         $unescepedJsFunctions = preg_replace_callback("/(\">>>)(.*?)(\<\<\<\")/i", function($matches){
             $str_inner = $matches[2];
-            return str_replace("\\\"", "\"", $str_inner);
+            $str_inner =  str_replace("\\\"", "\"", $str_inner);
+            return str_replace("\/\\", "\\", $str_inner);
         },$strJs);
         return $unescepedJsFunctions;
     }

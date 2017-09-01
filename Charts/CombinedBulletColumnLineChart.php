@@ -3,7 +3,11 @@
 namespace IK\AmChartsBundle\Charts;
 
 
+use Doctrine\Common\Collections\Collection;
+use IK\AmChartsBundle\Charts\Components\DataProvider;
 use IK\AmChartsBundle\Charts\Components\Type;
+use IK\AmChartsBundle\Charts\Components\ValueAxe;
+use IK\AmChartsBundle\Charts\Components\ValueAxes;
 use IK\AmChartsBundle\Charts\DefaultConfigs\CombinedBulletColumnLineChartDefault;
 use IK\AmChartsBundle\Helpers\CleanJsonSerializer;
 
@@ -35,6 +39,24 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
         $this->buildDefault();
     }
 
+    public function setDataProvider(DataProvider $dataProvider) {
+        $this->dataProvider = $dataProvider;
+    }
+
+    public function getGraphs()
+    {
+        return $this->graphs;
+    }
+
+    /**
+     * @return ValueAxes
+     */
+    public function getValueAxes()
+    {
+        return $this->valueAxes;
+    }
+
+
     public function buildDefault() {
         $js =  $this->chartDefaultData->getDefaultJs();
         $js = preg_replace_callback("/(function[^\}]*?)(\})/m", function($matches){
@@ -49,8 +71,6 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
         }
         $nameSpaceComponents = 'IK\AmChartsBundle\Charts\Components\\';
         foreach($objStd as $key => $value){
-//            xdebug_disable();
-//            ini_set('html_errors', 0);
             $className = $nameSpaceComponents.''.ucfirst($key);
             if (class_exists($nameSpaceComponents.''.ucfirst($key)) && property_exists($this, $key)) {
                 $object = new $className($value);
@@ -61,15 +81,6 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
        return true;
     }
 
-    protected function getDefaultJs(){
-       $js =  $this->chartDefaultData->getDefaultJs();
-        $js = preg_replace_callback("/(function[^\}]*?)(\})/m", function($matches){
-            $str = $matches[0];
-            $str = str_replace('\"','\\\"',$str);
-            return json_encode(">>>$str<<<");
-        },$js);
-        return $js;
-    }
 
     protected function getDefaultDiv(){
         return $this->chartDefaultData->getDefaultDiv();
@@ -83,7 +94,6 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
                 'dataDateFormat' => $this->dataDateFormat,
                 'precision' => $this->precision,
                 'valueAxes' => $this->valueAxes,
-
                 'graphs' => $this->graphs,
                 'chartScrollbar' => $this->chartScrollbar,
                 'chartCursor' => $this->chartCursor,
