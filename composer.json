@@ -2,7 +2,8 @@
     "name": "kalamurda/amcharts-bundle",
     "description": "library for building amcharts with php code",
     "keywords": ["symfony", "charts", "amcharts", "graph", "graphs"],
-    "type": "library",
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/Igor-Men/AmChartsBundle",
     "license": "MIT",
     "authors": [
         {
@@ -10,11 +11,9 @@
             "email": "dp030988kie@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.6.0",
-        "symfony/framework-bundle": "^2.7 || <3.3.6",
-        "twig/twig": "^1.0||^2.0"
+        "php": ">=5.6.0"
     },
     "autoload": {
         "psr-0": {
