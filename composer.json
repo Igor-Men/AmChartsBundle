@@ -21,5 +21,10 @@
             "IK\\AmChartsBundle": ""
         }
     },
-    "target-dir": "IK/AmChartsBundle"
+    "target-dir": "IK/AmChartsBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
 }
