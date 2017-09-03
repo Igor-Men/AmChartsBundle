@@ -6,8 +6,8 @@ interface ChartDefaultInterface {
 
     public function getDefaultDiv();
     public function getDefaultJs();
-    public function getDefaultCss();
+    public function getDefaultCss($theme);
     public function getDefaultHtml();
-    public function getDefaultResources();
+    public function getDefaultResources($theme);
 
 }

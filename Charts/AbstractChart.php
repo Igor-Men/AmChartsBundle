@@ -13,6 +13,23 @@ use Symfony\Component\Intl\Exception\NotImplementedException;
 
 abstract class AbstractChart implements ChartInterface, \JsonSerializable {
 
+    protected $themeCustomString = '';
+
+    protected $divSelector = '';
+    /**
+     * @return string
+     */
+    public function getThemeCustomString() {
+        return $this->themeCustomString;
+    }
+
+    /**
+     * @param string $themeCustomString
+     */
+    public function setThemeCustomString($themeCustomString) {
+        $this->themeCustomString = $themeCustomString;
+    }
+
     public function jsonSerialize()
     {
         throw new NotImplementedException();

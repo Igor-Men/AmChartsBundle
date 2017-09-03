@@ -5,6 +5,7 @@ namespace IK\AmChartsBundle\Charts;
 
 use Doctrine\Common\Collections\Collection;
 use IK\AmChartsBundle\Charts\Components\DataProvider;
+use IK\AmChartsBundle\Charts\Components\Theme;
 use IK\AmChartsBundle\Charts\Components\Type;
 use IK\AmChartsBundle\Charts\Components\ValueAxe;
 use IK\AmChartsBundle\Charts\Components\ValueAxes;
@@ -20,6 +21,9 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
 
 
     protected $type;
+    /**
+     * @var Theme
+     */
     protected $theme;
     protected $dataDateFormat;
     protected $precision;
@@ -34,18 +38,30 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
     protected $export;
     protected $dataProvider;
 
+    public function setTheme($name) {
+        $allowed = ['light', 'dark', 'black', 'none', 'chalk', 'patterns'];
+        if (!in_array($name, $allowed)) {
+            throw new \Exception('No theme with name:' . $name);
+        }
+        $this->theme = new Theme($name);
+        return true;
+    }
+
     public function __construct() {
         $this->chartDefaultData = new CombinedBulletColumnLineChartDefault();
         $this->buildDefault();
     }
 
-    public function setDataProvider(DataProvider $dataProvider) {
-        $this->dataProvider = $dataProvider;
+
+
+    public function getStyle() {
+        $theme = $this->theme->getTheme();
+        return $this->getThemeCustomString() ? $this->getThemeCustomString() : $this->chartDefaultData->getDefaultCss($theme);
     }
 
-    public function getGraphs()
-    {
-        return $this->graphs;
+    public function getLibraryScripts() {
+        $theme = $this->theme->getTheme();
+        return $this->chartDefaultData->getDefaultResources($theme);
     }
 
     /**
@@ -82,10 +98,20 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
        return true;
     }
 
+    public function setDataProvider(DataProvider $dataProvider) {
+        $this->dataProvider = $dataProvider;
+    }
 
     protected function getDefaultDiv(){
         return $this->chartDefaultData->getDefaultDiv();
     }
+
+    public function getGraphs()
+    {
+        return $this->graphs;
+    }
+
+
 
     public function jsonSerialize(){
         return
@@ -106,4 +132,6 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
                 'dataProvider' => $this->dataProvider->data,
             ]);
     }
+
+
 }

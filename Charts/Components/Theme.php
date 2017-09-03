@@ -15,6 +15,20 @@ class Theme implements \JsonSerializable {
         $this->theme = $theme;
     }
 
+    /**
+     * @return string
+     */
+    public function getTheme() {
+        return $this->theme;
+    }
+
+    /**
+     * @param string $theme
+     */
+    public function setTheme($theme) {
+        $this->theme = $theme;
+    }
+
     public function jsonSerialize() {
         return $this->theme;
     }

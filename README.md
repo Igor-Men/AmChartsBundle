@@ -67,11 +67,14 @@ You can create reusable code.
     $dataProvider = new DataProvider($preperadArr);
     
     $chart = new CombinedBulletColumnLineChart();
+    $chart->setTheme('dark');
     $chart->setDataProvider($dataProvider);  
-      
+  
     return $this->render('default/index.html.twig', [
-            'chart' => $chart
-        ]);
+        'chart' => $chart,
+        'style' => $chart->getStyle(),
+        'scripts' => $chart->getLibraryScripts()
+    ]);
         
     ```
     
@@ -81,25 +84,18 @@ You can create reusable code.
         <!-- Styles -->
         
         <style>
-            #chartdiv {
-                width: 100%;
-                height: 500px;
-            }
+            {{ style }}
         </style>
-
         <!-- Load jQuery from Google's CDN if needed -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-
-        <!-- Resources -->
-        <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-        <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-        <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-        <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>    
         
+        {{ scripts.standart|raw }}
+        {{ scripts.theme|raw }}
         <script type="text/javascript">
             {{ amchart(chart) }}
         </script>
+
+        <div id="chartdiv"></div>
         ...
     ```
     
