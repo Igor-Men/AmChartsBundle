@@ -10,6 +10,7 @@
             "email": "dp030988kie@gmail.com"
         }
     ],
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.6.0",
         "symfony/framework-bundle": "^2.7 || <3.3.6",
