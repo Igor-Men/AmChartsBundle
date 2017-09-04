@@ -4,7 +4,7 @@ namespace IK\AmChartsBundle\Charts\DefaultConfigs;
 
 class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
 
-    public function getDefaultDiv(){
+    public function getDefaultIDSelector(){
         return 'chartdiv';
     }
 
@@ -248,11 +248,8 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
 
         $string = isset($styleArr[$theme]) ? $styleArr[$theme] : '';
 
-        return trim(preg_replace('/\s\s+/', ' ', $string));
-    }
 
-    public function getDefaultHtml(){
-        return '<div id="chartdiv"></div>';
+        return trim(preg_replace('/\s\s+/', ' ', $string));
     }
 
     public function getDefaultResources($theme) {

@@ -64,9 +64,8 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
 
         $chartJS = $this->renderStartIIFE();
 
-        $chartJS .= "    var " . $this->type . "chart = new AmCharts.makeChart(\"" . $this->getDefaultDiv() . "\",";
+        $chartJS .= "    var " . $this->type . "chart = new AmCharts.makeChart(\"" . $this->getSelector() . "\",";
 
-//        $chartJS .= json_encode($this, JSON_PRETTY_PRINT);
         $chartJS .= $sctipt_string;
 
         $chartJS .= ");\n";

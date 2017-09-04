@@ -3,16 +3,14 @@
 namespace IK\AmChartsBundle\Charts;
 
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Id\UuidGenerator;
 use IK\AmChartsBundle\Charts\Components\DataProvider;
+use IK\AmChartsBundle\Charts\Components\Graphs;
 use IK\AmChartsBundle\Charts\Components\Theme;
-use IK\AmChartsBundle\Charts\Components\Type;
-use IK\AmChartsBundle\Charts\Components\ValueAxe;
 use IK\AmChartsBundle\Charts\Components\ValueAxes;
 use IK\AmChartsBundle\Charts\DefaultConfigs\CombinedBulletColumnLineChartDefault;
-use IK\AmChartsBundle\Helpers\CleanJsonSerializer;
 
-class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterface {
+class CombinedBulletColumnLineChart extends AbstractChart {
 
     /**
      * @var CombinedBulletColumnLineChartDefault
@@ -38,6 +36,22 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
     protected $export;
     protected $dataProvider;
 
+    private $id;
+    private $name;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
     public function setTheme($name) {
         $allowed = ['light', 'dark', 'black', 'none', 'chalk', 'patterns'];
         if (!in_array($name, $allowed)) {
@@ -47,16 +61,30 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
         return true;
     }
 
-    public function __construct() {
+    public function __construct($name = '') {
+        $this->name = $name;
+        $this->id = uniqid('id_', false);
         $this->chartDefaultData = new CombinedBulletColumnLineChartDefault();
         $this->buildDefault();
     }
 
-
-
     public function getStyle() {
         $theme = $this->theme->getTheme();
-        return $this->getThemeCustomString() ? $this->getThemeCustomString() : $this->chartDefaultData->getDefaultCss($theme);
+        $styleCSS =  $this->getThemeCustomString() ? $this->getThemeCustomString() : $this->chartDefaultData->getDefaultCss($theme);
+        if (!$this->dataProvider->data) {
+            $styleCSS = $styleCSS. ' #chartdiv {display: none};';
+        }
+        return $this->uniqueIdSelector($styleCSS);
+    }
+    private function uniqueIdSelector($string) {
+        $pattern = '/'.$this->chartDefaultData->getDefaultIDSelector().'/';
+        $replacement = $this->chartDefaultData->getDefaultIDSelector().$this->getId();
+        $newStr  = preg_replace($pattern, $replacement, $string);
+        return $newStr;
+    }
+
+    public function getSelector(){
+        return $this->chartDefaultData->getDefaultIDSelector().$this->getId();
     }
 
     public function getLibraryScripts() {
@@ -102,16 +130,20 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
         $this->dataProvider = $dataProvider;
     }
 
-    protected function getDefaultDiv(){
-        return $this->chartDefaultData->getDefaultDiv();
-    }
 
+
+    /**
+     * @return Graphs
+     */
     public function getGraphs()
     {
         return $this->graphs;
     }
 
 
+    public function getDataProviderData(){
+        return $this->dataProvider->data;
+    }
 
     public function jsonSerialize(){
         return
@@ -129,7 +161,7 @@ class CombinedBulletColumnLineChart extends AbstractChart implements ChartInterf
                 'legend' => $this->legend,
                 'balloon' => $this->balloon,
                 'export' => $this->export,
-                'dataProvider' => $this->dataProvider->data,
+                'dataProvider' => $this->getDataProviderData(),
             ]);
     }
 
