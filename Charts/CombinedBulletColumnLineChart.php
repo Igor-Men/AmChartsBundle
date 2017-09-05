@@ -152,7 +152,7 @@ class CombinedBulletColumnLineChart extends AbstractChart {
                 'theme' => $this->theme,
                 'dataDateFormat' => $this->dataDateFormat,
                 'precision' => $this->precision,
-                'valueAxes' => $this->valueAxes,
+                'valueAxes' => $this->valueAxes->jsonSerialize(),
                 'graphs' => $this->graphs,
                 'chartScrollbar' => $this->chartScrollbar,
                 'chartCursor' => $this->chartCursor,
@@ -164,6 +164,4 @@ class CombinedBulletColumnLineChart extends AbstractChart {
                 'dataProvider' => $this->getDataProviderData(),
             ]);
     }
-
-
 }

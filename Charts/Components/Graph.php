@@ -84,4 +84,29 @@ class Graph {
         }
         return $arr;
     }
+
+    public function getBalloonText()
+    {
+        return $this->balloonText;
+    }
+
+    public function setBalloonText($balloonText)
+    {
+        $this->balloonText = $balloonText;
+    }
+
+
+    public function getLegendValueText()
+    {
+        return $this->legendValueText;
+    }
+
+    public function setLegendValueText($legendValueText)
+    {
+        $this->legendValueText = $legendValueText;
+    }
+
+
+
+
 }

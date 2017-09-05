@@ -44,8 +44,9 @@ class ValueAxes implements \JsonSerializable {
 
     public function jsonSerialize() {
         $arr = [];
+        /** @var ValueAxe $object */
         foreach($this->valueAxes as $object){
-            $arr[] = $object->getData();
+            $arr[] = $object->jsonSerialize();
         }
         return $arr;
     }

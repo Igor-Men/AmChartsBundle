@@ -48,11 +48,12 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     {
         return "});\n";
     }
-    protected function cleanUpFunctionMethod($strJs) {
+    protected function postJsonProcess($strJs) {
         //return $strJs;
         $unescepedJsFunctions = preg_replace_callback("/(\">>>)(.*?)(\<\<\<\")/i", function($matches){
             $str_inner = $matches[2];
             $str_inner =  str_replace("\\\"", "\"", $str_inner);
+            $str_inner =  str_replace("\\/", "/", $str_inner);
             return str_replace("\/\\", "\\", $str_inner);
         },$strJs);
         return $unescepedJsFunctions;
@@ -60,7 +61,8 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
 
     public function render()
     {
-        $sctipt_string = $this->cleanUpFunctionMethod($this->jsonSerialize());
+        $serialized = $this->jsonSerialize();
+        $sctipt_string = $this->postJsonProcess($serialized);
 
         $chartJS = $this->renderStartIIFE();
 
