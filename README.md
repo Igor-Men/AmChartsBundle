@@ -71,9 +71,7 @@ You can create reusable code.
     $chart->setDataProvider($dataProvider);  
   
     return $this->render('default/index.html.twig', [
-        'chart' => $chart,
-        'style' => $chart->getStyle(),
-        'scripts' => $chart->getLibraryScripts()
+        'chart' => $chart
     ]);
         
     ```
@@ -81,20 +79,15 @@ You can create reusable code.
 2. twig index.html.twig
     ```
         ...
-        <!-- Styles -->
-        
-        <style>
-            {{ style }}
-        </style>
         <!-- Load jQuery from Google's CDN if needed -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+                
+        {{ chart.libraryScripts.standart|raw }}
         
-        {{ scripts.standart|raw }}
-        {{ scripts.theme|raw }}
-        <script type="text/javascript">
-            {{ amchart(chart) }}
-        </script>
-
+        <style>{{ chart.style }}</style>
+        {{ chart.libraryScripts.theme|raw }}
+        <script>{{ amchart(chart) }}</script>
+ 
         <div id="chartdiv"></div>
         ...
     ```

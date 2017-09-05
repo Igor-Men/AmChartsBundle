@@ -29,7 +29,7 @@ foreach ($anotherGraphDataArr as $item) {
 
 $dataProvider = new DataProvider($preperadArr);
 
-$chart = new CombinedBulletColumnLineChart();
+$chart = new CombinedBulletColumnLineChart('Name Of Cart');
 $column1Graphs = $chart->getGraphs();
 
 //lines
