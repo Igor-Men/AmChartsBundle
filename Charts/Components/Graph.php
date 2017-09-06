@@ -106,7 +106,167 @@ class Graph {
         $this->legendValueText = $legendValueText;
     }
 
+    public function getLineColor()
+    {
+        return $this->lineColor;
+    }
+
+    public function setLineColor($lineColor)
+    {
+        $this->lineColor = $lineColor;
+    }
+
+    public function getFillColors()
+    {
+        return $this->fillColors;
+    }
+
+    public function setFillColors($fillColors)
+    {
+        $this->fillColors = $fillColors;
+    }
+
+    public function getFillAlphas()
+    {
+        return $this->fillAlphas;
+    }
+
+    public function setFillAlphas($fillAlphas)
+    {
+        $this->fillAlphas = $fillAlphas;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    public function getClustered()
+    {
+        return $this->clustered;
+    }
+
+    public function setClustered($clustered)
+    {
+        $this->clustered = $clustered;
+    }
+
+    public function getColumnWidth()
+    {
+        return $this->columnWidth;
+    }
+
+    public function setColumnWidth($columnWidth)
+    {
+        $this->columnWidth = $columnWidth;
+    }
+
+    public function getBullet()
+    {
+        return $this->bullet;
+    }
+
+    public function setBullet($bullet)
+    {
+        $this->bullet = $bullet;
+    }
+
+    public function getBulletBorderAlpha()
+    {
+        return $this->bulletBorderAlpha;
+    }
+
+    public function setBulletBorderAlpha($bulletBorderAlpha)
+    {
+        $this->bulletBorderAlpha = $bulletBorderAlpha;
+    }
+
+    public function getBulletBobulletrderAlpha()
+    {
+        return $this->bulletBobulletrderAlpha;
+    }
+
+    public function setBulletBobulletrderAlpha($bulletBobulletrderAlpha)
+    {
+        $this->bulletBobulletrderAlpha = $bulletBobulletrderAlpha;
+    }
+
+    public function getBulletColor()
+    {
+        return $this->bulletColor;
+    }
+
+    public function setBulletColor($bulletColor)
+    {
+        $this->bulletColor = $bulletColor;
+    }
+
+    public function getBulletSize()
+    {
+        return $this->bulletSize;
+    }
+
+    public function setBulletSize($bulletSize)
+    {
+        $this->bulletSize = $bulletSize;
+    }
+
+    public function getHideBulletsCount()
+    {
+        return $this->hideBulletsCount;
+    }
+
+    public function setHideBulletsCount($hideBulletsCount)
+    {
+        $this->hideBulletsCount = $hideBulletsCount;
+    }
+
+    public function getLineThickness()
+    {
+        return $this->lineThickness;
+    }
 
 
+    public function setLineThickness($lineThickness)
+    {
+        $this->lineThickness = $lineThickness;
+    }
 
+
+    public function getUseLineColorForBulletBorder()
+    {
+        return $this->useLineColorForBulletBorder;
+    }
+
+
+    public function setUseLineColorForBulletBorder($useLineColorForBulletBorder)
+    {
+        $this->useLineColorForBulletBorder = $useLineColorForBulletBorder;
+    }
+
+
+    public function getDashLength()
+    {
+        return $this->dashLength;
+    }
+
+    public function setDashLength($dashLength)
+    {
+        $this->dashLength = $dashLength;
+    }
+
+    public function setValueAxis($valueAxis)
+    {
+        $this->valueAxis = $valueAxis;
+    }
+
+    public function setValueField($valueField)
+    {
+        $this->valueField = $valueField;
+    }
 }

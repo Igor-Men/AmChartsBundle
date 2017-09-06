@@ -17,7 +17,7 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                   "precision": 2,
                   "valueAxes": [{
                     "id": "v1",
-                    "title": "Lines",
+                    "title": "Columns",
                     "position": "left",
                     "autoGridCount": false,
                     "labelFunction": function(value) {
@@ -25,7 +25,7 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
                     }
                   }, {
                     "id": "v2",
-                    "title": "Columns",
+                    "title": "Lines",
                     "gridAlpha": 0,
                     "position": "right",
                     "autoGridCount": false
