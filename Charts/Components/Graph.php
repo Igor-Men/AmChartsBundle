@@ -9,7 +9,7 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class Graph {
+class Graph extends AbstractProperty {
 
     public $id;
     public $valueAxis;
@@ -49,12 +49,8 @@ class Graph {
         return $this->valueAxis;
     }
 
-    public function __construct($strValueAxe) {
-        foreach ($strValueAxe as $property => $value) {
-            if (property_exists($this, $property)) {
-                $this->{$property} = $value;
-            }
-        }
+    public function __construct($arrProps) {
+        $this->setArrProperties($arrProps);
     }
 
     public function setId($id)
@@ -64,25 +60,6 @@ class Graph {
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getData(){
-        $arr = [];
-        foreach(get_object_vars($this) as $name => $value) {
-            if ($value !== null) {
-                $arr[$name] = $value;
-            }
-        }
-        return (object)$arr;
-    }
-    public function jsonSerialize() {
-        $arr = [];
-        foreach(get_object_vars($this) as $name => $value) {
-            if ($value !== null) {
-                $arr[$name] = $value;
-            }
-        }
-        return $arr;
     }
 
     public function getBalloonText()

@@ -1,6 +1,6 @@
 {
     "name": "kalamurda/amcharts-bundle",
-    "description": "library for building amcharts with php code",
+    "description": "Symfony-bundle for building amcharts with php code",
     "keywords": ["symfony", "charts", "amcharts", "graph", "graphs"],
     "type": "symfony-bundle",
     "homepage": "https://github.com/Igor-Men/AmChartsBundle",

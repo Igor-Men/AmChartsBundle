@@ -14,9 +14,7 @@ class Precision implements \JsonSerializable {
     public function __construct($precision) {
         $this->precision = $precision;
     }
-    function __toString() {
-        return $this->precision;
-    }
+
     public function jsonSerialize() {
         return $this->precision;
     }

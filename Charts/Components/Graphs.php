@@ -67,8 +67,9 @@ class Graphs implements \JsonSerializable {
 
     public function jsonSerialize() {
         $arr = [];
+        /** @var Graph $graph */
         foreach($this->graphs as $graph){
-            $arr[] = $graph->getData();
+            $arr[] = $graph->jsonSerialize();
         }
         return $arr;
     }

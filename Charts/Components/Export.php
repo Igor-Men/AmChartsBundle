@@ -9,15 +9,11 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class Export {
+class Export extends AbstractProperty {
 
     public $enabled;
 
     public function __construct($stdObject) {
-        foreach ($stdObject as $property => $value) {
-            if (property_exists($this, $property)) {
-                $this->{$property} = $value;
-            }
-        }
+        $this->setArrProperties($stdObject);
     }
 }
