@@ -1,0 +1,59 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: igor
+ * Date: 08.09.17
+ * Time: 0:29
+ */
+
+namespace IK\AmChartsBundle\Charts;
+
+
+use IK\AmChartsBundle\Charts\DefaultConfigs\Funnel3dChartDefault;
+
+class Funnel3dChart extends AbstractChart {
+
+    protected $type;
+    protected $balloon;
+    protected $valueField;
+    protected $titleField;
+    protected $marginRight;
+    protected $marginLeft;
+    protected $startX;
+    protected $depth3D;
+    protected $angle;
+    protected $outlineAlpha;
+    protected $outlineColor;
+    protected $outlineThickness;
+    protected $labelPosition;
+    protected $balloonText;
+
+    public function __construct($name = '') {
+        $this->name = $name;
+        $this->chartDefaultData = new Funnel3dChartDefault();
+        parent::__construct();
+    }
+
+    public function jsonSerialize() {
+        return
+            json_encode([
+                'type' => $this->type,
+                'theme' => $this->theme,
+                'dataProvider' => $this->getDataProviderData(),
+                'balloon' => $this->balloon,
+                'valueField' => $this->valueField,
+                'titleField' => $this->titleField,
+                'marginRight' => $this->marginRight,
+                'marginLeft' => $this->marginLeft,
+                'startX' => $this->startX,
+                'depth3D' => $this->depth3D,
+                'angle' => $this->angle,
+                'outlineAlpha' => $this->outlineAlpha,
+                'outlineColor' => $this->outlineColor,
+                'outlineThickness' => $this->outlineThickness,
+                'labelPosition' => $this->labelPosition,
+                'balloonText' => $this->balloonText,
+                'export' => $this->export,
+            ]);
+    }
+}

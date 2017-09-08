@@ -9,11 +9,15 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class Export extends AbstractProperty {
+class Export extends AbstractProperty implements \JsonSerializable {
 
     public $enabled;
 
     public function __construct($stdObject) {
         $this->setArrProperties($stdObject);
+    }
+
+    public function jsonSerialize(){
+        return ['enabled' => $this->enabled];
     }
 }

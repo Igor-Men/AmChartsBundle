@@ -88,7 +88,7 @@ You can create reusable code.
         {{ chart.libraryScripts.theme|raw }}
         <script>{{ amchart(chart) }}</script>
  
-        <div id="chartdiv"></div>
+        <div id="{{ chart.selector }}"></div>
         ...
     ```
     
