@@ -9,54 +9,51 @@
 namespace IK\AmChartsBundle\Charts\DefaultConfigs;
 
 
-class Funnel3dChartDefault extends AbstractChartDefault {
+class FunnelChartDefault extends AbstractChartDefault {
 
     public function getDefaultJs(){
         $string = '
         {
               "type": "funnel",
-              "theme": "light",
+              "theme": "dark",
               "dataProvider": [ {
                 "title": "Website visits",
-                "value": 200
+                "value": 300
               }, {
                 "title": "Downloads",
                 "value": 123
               }, {
-                "title": "Requested price list",
+                "title": "Requested prices",
                 "value": 98
               }, {
-                "title": "Contaced for more info",
+                "title": "Contacted",
                 "value": 72
               }, {
                 "title": "Purchased",
                 "value": 35
               }, {
-                "title": "Contacted for support",
-                "value": 35
+                "title": "Asked for support",
+                "value": 25
               }, {
-                "title": "Purchased additional products",
-                "value": 26
+                "title": "Purchased more",
+                "value": 18
               } ],
-              "balloon": {
-                "fixedPosition": true
-              },
-              "valueField": "value",
               "titleField": "title",
-              "marginRight": 240,
-              "marginLeft": 50,
-              "startX": -500,
-              "depth3D": 100,
-              "angle": 40,
-              "outlineAlpha": 1,
-              "outlineColor": "#FFFFFF",
-              "outlineThickness": 2,
+              "marginRight": 160,
+              "marginLeft": 15,
               "labelPosition": "right",
-              "balloonText": "[[title]]: [[value]]n[[description]]",
+              "funnelAlpha": 0.9,
+              "valueField": "value",
+              "startX": 0,
+              "neckWidth": "40%",
+              "startAlpha": 0,
+              "outlineThickness": 1,
+              "neckHeight": "30%",
+              "balloonText": "[[title]]:<b>[[value]]</b>",
               "export": {
                 "enabled": true
               }
-         }
+            }
         ';
 
         return trim(preg_replace('/\s\s+/', ' ', $string));

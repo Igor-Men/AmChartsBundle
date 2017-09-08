@@ -34,6 +34,46 @@ class Graph extends AbstractProperty {
     public $useLineColorForBulletBorder;
     public $dashLength;
 
+    public $lineAlpha;
+    public $labelText;
+    public $labelFunction;
+    public $balloonFunction;
+
+    public function getLineAlpha() {
+        return $this->lineAlpha;
+    }
+
+
+    public function setLineAlpha($lineAlpha) {
+        $this->lineAlpha = $lineAlpha;
+    }
+
+
+    public function getLabelText() {
+        return $this->labelText;
+    }
+
+
+    public function setLabelText($labelText) {
+        $this->labelText = $labelText;
+    }
+
+    public function getLabelFunction() {
+        return $this->labelFunction;
+    }
+
+    public function setLabelFunction($labelFunction) {
+        $this->labelFunction = $labelFunction;
+    }
+
+    public function getBalloonFunction() {
+        return $this->balloonFunction;
+    }
+
+    public function setBalloonFunction($balloonFunction) {
+        $this->balloonFunction = $balloonFunction;
+    }
+
     public function setTitle($title)
     {
         $this->title = $title;

@@ -16,6 +16,7 @@ class ChartCursor {
     public $cursorAlpha;
     public $valueLineAlpha;
 
+    public $fullWidth;
 
     public function __construct($strValueAxe) {
         foreach ($strValueAxe as $property => $value) {

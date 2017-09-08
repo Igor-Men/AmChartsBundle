@@ -58,6 +58,20 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         $this->name = $name;
     }
 
+    /**
+     * @return Export
+     */
+    public function getExport(): Export {
+        return $this->export;
+    }
+
+    /**
+     * @param Export $export
+     */
+    public function setExport(Export $export) {
+        $this->export = $export;
+    }
+
     protected function generateId() {
         $this->id = uniqid('id_', false);
     }
@@ -93,7 +107,8 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
 
     public function getLibraryScripts() {
         $theme = $this->theme->getTheme();
-        return $this->chartDefaultData->getDefaultResources($theme);
+        $isEnabledExport = $this->export->getEnabled();
+        return $this->chartDefaultData->getDefaultResources($theme, $isEnabledExport);
     }
 
     public function setDataProvider(DataProvider $dataProvider) {

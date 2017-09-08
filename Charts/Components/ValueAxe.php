@@ -20,6 +20,8 @@ class ValueAxe implements  \JsonSerializable {
 
     public $gridAlpha;
 
+    public $ignoreAxisWidth;
+
     public function __construct($strValueAxe = []) {
         foreach ($strValueAxe as $property => $value) {
             if (property_exists($this, $property)) {

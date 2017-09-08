@@ -15,6 +15,10 @@ class CategoryAxis extends AbstractProperty {
     public $dashLength;
     public $minorGridEnabled;
 
+    public $gridPosition;
+    public $gridAlpha;
+    public $axisAlpha;
+
     public function __construct($stdObject) {
         $this->setArrProperties($stdObject);
     }

@@ -17,6 +17,22 @@ class Export extends AbstractProperty implements \JsonSerializable {
         $this->setArrProperties($stdObject);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getEnabled() {
+        return $this->enabled;
+    }
+
+    /**
+     * @param mixed $enabled
+     */
+    public function setEnabled($enabled) {
+        $this->enabled = $enabled;
+    }
+
+
+
     public function jsonSerialize(){
         return ['enabled' => $this->enabled];
     }

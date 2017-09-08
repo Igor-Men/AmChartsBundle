@@ -7,6 +7,6 @@ interface ChartDefaultInterface {
     public function getDefaultIDSelector();
     public function getDefaultJs();
     public function getDefaultCss($theme);
-    public function getDefaultResources($theme);
+    public function getDefaultResources($theme, $isEnabledExport);
 
 }

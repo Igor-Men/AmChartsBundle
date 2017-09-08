@@ -2,11 +2,7 @@
 
 namespace IK\AmChartsBundle\Charts\DefaultConfigs;
 
-class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
-
-    public function getDefaultIDSelector(){
-        return 'chartdiv';
-    }
+class CombinedBulletColumnLineChartDefault extends AbstractChartDefault {
 
     public function getDefaultJs(){
         $string =  '
@@ -223,64 +219,7 @@ class CombinedBulletColumnLineChartDefault implements ChartDefaultInterface {
         return trim(preg_replace('/\s\s+/', ' ', $string));
     }
 
-    public function getDefaultCss($theme){
-
-        $light =  '
-                #chartdiv {
-                  width: 100%;
-                  height: 500px;
-                }
-            ';
-        $black = 'body #chartdiv { background-color: #000; color: #fff; }' . $light;
-        $dark = 'body #chartdiv { background-color: #30303d; color: #fff; }' . $light;
-        $none = $light;
-        $chalk = 'body #chartdiv { background-color: #3f3e3b; color: #fff; }' . $light;
-        $patterns = $light;
-
-        $styleArr = [
-            'light' => $light,
-            'black' => $black,
-            'dark' => $dark,
-            'none' => $none,
-            'chalk' => $chalk,
-            'patterns' => $patterns,
-        ];
-
-        $string = isset($styleArr[$theme]) ? $styleArr[$theme] : '';
-
-
-        return trim(preg_replace('/\s\s+/', ' ', $string));
-    }
-
-    public function getDefaultResources($theme) {
-
-        $amChartStandart = '
-                <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-                <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-                <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-                <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-        ';
-
-        $light = '<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>';
-        $black = '<script src="https://www.amcharts.com/lib/3/themes/black.js"></script>';
-        $dark = '<script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>';
-        $none = '<script src="https://www.amcharts.com/lib/3/themes/none.js"></script>';
-        $chalk = '<script src="https://www.amcharts.com/lib/3/themes/chalk.js"></script>';
-        $patterns = '<script src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>';
-
-        $sctiptTheme = [
-            'light' => $light,
-            'dark' => $dark,
-            'black' => $black,
-            'none' => $none,
-            'chalk' => $chalk,
-            'patterns' => $patterns,
-        ];
-
-        $sctiptThemeString = isset($sctiptTheme[$theme]) ? $sctiptTheme[$theme] : '';
-        $arr = [];
-        $arr['standart'] = trim(preg_replace('/\s\s+/', ' ', $amChartStandart));
-        $arr['theme'] = trim(preg_replace('/\s\s+/', ' ', $sctiptThemeString));
-        return $arr;
+    protected function getChartScript() {
+        return '<script src="https://www.amcharts.com/lib/3/serial.js"></script>';
     }
 }
