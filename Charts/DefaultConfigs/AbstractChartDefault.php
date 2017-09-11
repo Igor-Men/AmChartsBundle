@@ -1,30 +1,40 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: igor
- * Date: 09.09.17
- * Time: 1:22
- */
 
 namespace IK\AmChartsBundle\Charts\DefaultConfigs;
 
 
-use Symfony\Component\Intl\Exception\NotImplementedException;
+use IK\AmChartsBundle\Charts\DefaultConfigs\ChartDefaultInterface;
 
 abstract class AbstractChartDefault implements ChartDefaultInterface {
 
+    const SOURCE_CDN_AMCHART = 'https://www.amcharts.com/lib/3';
+    const SOURCE_LOCAL_AMCHART = '/bundles/ikamcharts/js';
+    const SOURCE_CDN_JQUERY = 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+    const SOURCE_LOCAL_JQUERY = '/bundles/ikamcharts/js/lib/jquery.min.js';
+
+    protected $srcAm;
+    protected $srcJq;
+    public function __construct($codeSourceType = 'LOCAL') {
+        $this->srcAm = $this->getSrcAm($codeSourceType);
+        $this->srcJq = $this->getSrcJq($codeSourceType);
+    }
+    protected function getSrcAm($codeSourceType){
+        return $codeSourceType == 'LOCAL' ? self::SOURCE_LOCAL_AMCHART : self::SOURCE_CDN_AMCHART;
+    }
+    protected function getSrcJq($codeSourceType){
+        return $codeSourceType == 'LOCAL' ? self::SOURCE_LOCAL_JQUERY : self::SOURCE_CDN_JQUERY;
+    }
     public function getDefaultIDSelector(){
         return 'chartdiv';
     }
-
     public function getThemaScripts($theme) {
 
-        $light = '<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>';
-        $black = '<script src="https://www.amcharts.com/lib/3/themes/black.js"></script>';
-        $dark = '<script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>';
-        $none = '<script src="https://www.amcharts.com/lib/3/themes/none.js"></script>';
-        $chalk = '<script src="https://www.amcharts.com/lib/3/themes/chalk.js"></script>';
-        $patterns = '<script src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>';
+        $light = '<script src="'.$this->srcAm.'/themes/light.js"></script>';
+        $black = '<script src="'.$this->srcAm.'/themes/black.js"></script>';
+        $dark = '<script src="'.$this->srcAm.'/themes/dark.js"></script>';
+        $none = '<script src="'.$this->srcAm.'/themes/none.js"></script>';
+        $chalk = '<script src="'.$this->srcAm.'/themes/chalk.js"></script>';
+        $patterns = '<script src="'.$this->srcAm.'/themes/patterns.js"></script>';
 
         $sctiptTheme = [
             'light' => $light,
@@ -70,8 +80,9 @@ abstract class AbstractChartDefault implements ChartDefaultInterface {
     }
 
     public function getExportResource($isEnabledExport) {
-        $allResource = '<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-                        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />';
+
+        $allResource = '<script src="'.$this->srcAm.'/plugins/export/export.min.js"></script>
+                        <link rel="stylesheet" href="'.$this->srcAm.'/plugins/export/export.css" type="text/css" media="all" />';
 
         $default = [
             'script' => '',
@@ -80,8 +91,8 @@ abstract class AbstractChartDefault implements ChartDefaultInterface {
         ];
 
         return !$isEnabledExport ? $default : [
-            'script' => '<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>',
-            'link' => '<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />',
+            'script' => '<script src="'.$this->srcAm.'/plugins/export/export.min.js"></script>',
+            'link' => '<link rel="stylesheet" href="'.$this->srcAm.'/plugins/export/export.css" type="text/css" media="all" />',
             'all' => $allResource
         ];
     }
@@ -89,7 +100,7 @@ abstract class AbstractChartDefault implements ChartDefaultInterface {
     protected abstract function getChartScript();
 
     public function getDefaultResources($theme, $isEnabledExport){
-        $amChartStandart = '<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>';
+        $amChartStandart = '<script src="'.$this->srcAm.'/amcharts.js"></script>';
         $standart = $amChartStandart.$this->getChartScript();
 
         $arr = [];

@@ -76,6 +76,11 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         $this->id = uniqid('id_', false);
     }
 
+    /**
+     * @param string['light','dark']  $nameName
+     * @return bool
+     * @throws \Exception
+     */
     public function setTheme($nameName) {
         $allowed = ['light', 'dark', 'black', 'none', 'chalk', 'patterns'];
         if (!in_array($nameName, $allowed)) {

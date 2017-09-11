@@ -9,6 +9,7 @@
 namespace IK\AmChartsBundle\Charts\DefaultConfigs;
 
 
+
 class Funnel3dChartDefault extends AbstractChartDefault {
 
     public function getDefaultJs(){
@@ -63,6 +64,6 @@ class Funnel3dChartDefault extends AbstractChartDefault {
     }
 
     protected function getChartScript() {
-        return '<script src="https://www.amcharts.com/lib/3/funnel.js"></script>';
+        return '<script src="'.$this->srcAm.'/funnel.js"></script>';
     }
 }
