@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: igor
- * Date: 09.09.17
- * Time: 0:29
- */
 
 namespace IK\AmChartsBundle\Charts\Components;
 
