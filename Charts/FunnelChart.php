@@ -3,6 +3,7 @@
 namespace IK\AmChartsBundle\Charts;
 
 
+use IK\AmChartsBundle\Charts\DefaultConfigs\AbstractChartDefault;
 use IK\AmChartsBundle\Charts\DefaultConfigs\Funnel3dChartDefault;
 use IK\AmChartsBundle\Charts\DefaultConfigs\FunnelChartDefault;
 
@@ -23,9 +24,9 @@ class FunnelChart extends AbstractChart {
     protected $balloonText;
     protected $export;
 
-    public function __construct($name = '') {
+    public function __construct($name = '', $codeSourceType = AbstractChartDefault::SOURCE_CND) {
         $this->name = $name;
-        $this->chartDefaultData = new FunnelChartDefault();
+        $this->chartDefaultData = new FunnelChartDefault($codeSourceType);
         parent::__construct();
     }
 

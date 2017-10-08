@@ -8,6 +8,7 @@ use IK\AmChartsBundle\Charts\Components\DataProvider;
 use IK\AmChartsBundle\Charts\Components\Graphs;
 use IK\AmChartsBundle\Charts\Components\Theme;
 use IK\AmChartsBundle\Charts\Components\ValueAxes;
+use IK\AmChartsBundle\Charts\DefaultConfigs\AbstractChartDefault;
 use IK\AmChartsBundle\Charts\DefaultConfigs\CombinedBulletColumnLineChartDefault;
 
 class CombinedBulletColumnLineChart extends AbstractChart {
@@ -24,9 +25,9 @@ class CombinedBulletColumnLineChart extends AbstractChart {
     protected $legend;
     protected $balloon;
 
-    public function __construct($name = '') {
+    public function __construct($name = '', $codeSourceType = AbstractChartDefault::SOURCE_CND) {
         $this->name = $name;
-        $this->chartDefaultData = new CombinedBulletColumnLineChartDefault();
+        $this->chartDefaultData = new CombinedBulletColumnLineChartDefault($codeSourceType);
         parent::__construct();
     }
 

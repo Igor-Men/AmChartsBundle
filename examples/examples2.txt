@@ -1,0 +1,41 @@
+ //controller
+
+ public function indexAction(Request $request)
+    {
+        $chart = new CombinedBulletColumnLineChart('some Name', AbstractChartDefault::SOURCE_CND);
+        $chart->setTheme('light');
+        $export = $chart->getExport();
+        $export->setEnabled(false);
+
+        return $this->render('default/index.html.twig', [
+            'chart' => $chart
+        ]);
+    }
+
+
+// index.html.twig
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <!-- Styles -->
+
+            <h1>{{ chart.name }}</h1>
+            <style>
+                {{ chart.style }}
+            </style>
+
+            {{ chart.libraryScripts.jq|raw }}
+
+            {{ chart.libraryScripts.standart|raw }}
+            {{ chart.libraryScripts.export.all|raw }}
+            {{ chart.libraryScripts.theme|raw }}
+
+            <script type="text/javascript">
+                {{ amchart(chart) }}
+            </script>
+
+            <div id="{{ chart.selector }}"></div>
+
+        </div>
+    </div>
+{% endblock %}

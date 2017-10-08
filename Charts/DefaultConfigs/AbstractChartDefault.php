@@ -7,20 +7,34 @@ use IK\AmChartsBundle\Charts\DefaultConfigs\ChartDefaultInterface;
 
 abstract class AbstractChartDefault implements ChartDefaultInterface {
 
+    const SOURCE_CND = 'CDN';
+    const SOURCE_LOCAL = 'LOCAL';
+
     const SOURCE_CDN_AMCHART = 'https://www.amcharts.com/lib/3';
     const SOURCE_LOCAL_AMCHART = '/bundles/ikamcharts/js';
-    const SOURCE_CDN_JQUERY = 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
-    const SOURCE_LOCAL_JQUERY = '/bundles/ikamcharts/js/lib/jquery.min.js';
+
+    const SOURCE_CDN_JQUERY = 'http://ajax.googleapis.com/ajax/libs/';
+    const SOURCE_LOCAL_JQUERY = '/bundles/ikamcharts/js/libs/';
 
     protected $srcAm;
     protected $srcJq;
-    public function __construct($codeSourceType = 'LOCAL') {
+    public function __construct($codeSourceType = self::SOURCE_CND) {
         $this->srcAm = $this->getSrcAm($codeSourceType);
         $this->srcJq = $this->getSrcJq($codeSourceType);
     }
+    public function setSrcType($codeSourceType) {
+        if (!in_array($codeSourceType , ['LOCAL', 'CDN'])) {
+            throw new \InvalidArgumentException('must be LOCAL or CDN');
+        }
+        $this->srcAm = $this->getSrcAm($codeSourceType);
+        $this->srcJq = $this->getSrcJq($codeSourceType);
+        return true;
+    }
+
     protected function getSrcAm($codeSourceType){
         return $codeSourceType == 'LOCAL' ? self::SOURCE_LOCAL_AMCHART : self::SOURCE_CDN_AMCHART;
     }
+
     protected function getSrcJq($codeSourceType){
         return $codeSourceType == 'LOCAL' ? self::SOURCE_LOCAL_JQUERY : self::SOURCE_CDN_JQUERY;
     }
@@ -107,6 +121,7 @@ abstract class AbstractChartDefault implements ChartDefaultInterface {
         $arr['standart'] = trim(preg_replace('/\s\s+/', ' ', $standart));
         $arr['export'] = $this->getExportResource($isEnabledExport);
         $arr['theme'] = $this->getThemaScripts($theme);
+        $arr['jq'] = '<script src="'.$this->srcJq.'jquery/1.7.1/jquery.min.js"></script>';
         return $arr;
     }
 }
