@@ -64,6 +64,7 @@ class CombinedBulletColumnLineChart extends AbstractChart {
                 'balloon' => $this->balloon,
                 'export' => $this->export->jsonSerialize(),
                 'dataProvider' => $this->getDataProviderData(),
+                'listeners' => $this->renderListeners()
             ]);
     }
 }
