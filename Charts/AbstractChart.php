@@ -57,10 +57,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         foreach($this->eventListeners as $listener) {
             $result[] = (object)$listener->jsonSerialize();
         }
-        return json_encode($result);
-//        $string = json_encode($this->eventListeners);
-//        print_r($string);
-//        exit('rendered');
+        return $result;
     }
 
     public function __construct() {
@@ -208,10 +205,15 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         $unescepedJsFunctions = preg_replace_callback("/(\">>>)(.*?)(\<\<\<\")/i", function($matches){
             $str_inner = $matches[2];
             $str_inner =  str_replace("\\\"", "\"", $str_inner);
+            $str_inner =  str_replace("\\\'", "\'", $str_inner);
             $str_inner =  str_replace("\\/", "/", $str_inner);
             return str_replace("\/\\", "\\", $str_inner);
         },$strJs);
         return $unescepedJsFunctions;
+    }
+
+    public function getChartVariableName() {
+        return $this->type."_".$this->getId();
     }
 
     public function render()
@@ -221,7 +223,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
 
         $chartJS = $this->renderStartIIFE();
 
-        $chartJS .= "    var " . $this->type . "chart = new AmCharts.makeChart(\"" . $this->getSelector() . "\",";
+        $chartJS .= "    " . $this->getChartVariableName() . " = new AmCharts.makeChart(\"" . $this->getSelector() . "\",";
 
         $chartJS .= $sctipt_string;
 

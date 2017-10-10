@@ -1,0 +1,7 @@
+- implement basic events for charts and ability write some expressions in php controller.
+
+- get logic serialize(functions) from AbstractListener and refactor all.
+
+- finish StackedBarChartWithNegativeValues
+
+- create some phpunit tests.
