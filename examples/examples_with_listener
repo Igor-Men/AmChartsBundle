@@ -1,0 +1,13 @@
+$chart = new CombinedBulletColumnLineChart('some Name');
+$chartVarName = $chart->getChartVariableName();
+$listener = new ListenerInit();
+
+$listener->setMethod("function(e){
+     $chartVarName.hideGraph($chartVarName.getGraphById('g1')); //will hide graph with id 'g1'
+}");
+
+$chart->addListener($listener);
+
+return $this->render('default/index.html.twig', [
+    'chart' => $chart
+]);

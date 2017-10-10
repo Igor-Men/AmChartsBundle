@@ -3,8 +3,11 @@
 namespace IK\AmChartsBundle\Charts;
 
 
+use IK\AmChartsBundle\Charts\Components\AbstractListener;
 use IK\AmChartsBundle\Charts\Components\DataProvider;
+use IK\AmChartsBundle\Charts\Components\EventInterface;
 use IK\AmChartsBundle\Charts\Components\Export;
+use IK\AmChartsBundle\Charts\Components\ListenerInterface;
 use IK\AmChartsBundle\Charts\Components\Theme;
 use IK\AmChartsBundle\Charts\DefaultConfigs\ChartDefaultInterface;
 use Symfony\Component\Intl\Exception\NotImplementedException;
@@ -25,6 +28,37 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     protected $themeCustomString = '';
 
     protected $divSelector = '';
+
+    protected $eventListeners = [];
+
+    public function getListeners() {
+        return $this->eventListeners;
+    }
+
+    public function getListener($eventName) {
+        return isset($this->eventListeners[$eventName]) ? $this->eventListeners[$eventName] : false;
+    }
+
+    public function addListener(ListenerInterface $listener) {
+        $this->eventListeners[$listener->getName()] = $listener;
+    }
+
+    public function removeListener(ListenerInterface $listener) {
+        if (isset($this->eventListeners[$listener->getName()])) {
+            unset($this->eventListeners[$listener->getName()]);
+            return true;
+        }
+        return false;
+    }
+
+    protected function renderListeners() {
+        $result = [];
+        /** @var AbstractListener $listener */
+        foreach($this->eventListeners as $listener) {
+            $result[] = (object)$listener->jsonSerialize();
+        }
+        return $result;
+    }
 
     public function __construct() {
         $this->generateId();
@@ -55,7 +89,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     /**
      * @return Export
      */
-    public function getExport(): Export {
+    public function getExport() {
         return $this->export;
     }
 
@@ -171,10 +205,15 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         $unescepedJsFunctions = preg_replace_callback("/(\">>>)(.*?)(\<\<\<\")/i", function($matches){
             $str_inner = $matches[2];
             $str_inner =  str_replace("\\\"", "\"", $str_inner);
+            $str_inner =  str_replace("\\\'", "\'", $str_inner);
             $str_inner =  str_replace("\\/", "/", $str_inner);
             return str_replace("\/\\", "\\", $str_inner);
         },$strJs);
         return $unescepedJsFunctions;
+    }
+
+    public function getChartVariableName() {
+        return $this->type."_".$this->getId();
     }
 
     public function render()
@@ -184,7 +223,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
 
         $chartJS = $this->renderStartIIFE();
 
-        $chartJS .= "    var " . $this->type . "chart = new AmCharts.makeChart(\"" . $this->getSelector() . "\",";
+        $chartJS .= "    " . $this->getChartVariableName() . " = new AmCharts.makeChart(\"" . $this->getSelector() . "\",";
 
         $chartJS .= $sctipt_string;
 
