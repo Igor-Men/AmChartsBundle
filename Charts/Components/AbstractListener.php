@@ -22,7 +22,6 @@ class AbstractListener implements ListenerInterface, \JsonSerializable
     }
 
     public function setMethod($methodFunction) {
-//        $methodFunction = str_replace('  ','',$methodFunction);
         $methodFunction = preg_replace('!\s+!', ' ', $methodFunction);
         $methodFunction = preg_replace('/^ /', '', $methodFunction);
         $methodFunction = preg_replace('/ $/', '', $methodFunction);
