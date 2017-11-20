@@ -5,6 +5,11 @@
 symfony-amcharts
 =============
 
+Already implemented charts:  
+    <a href="https://www.amcharts.com/demos/3d-funnel-chart/" >3d funnel chart</a>  
+    <a href="https://www.amcharts.com/demos/funnel-chart/" >funnel chart</a>  
+    <a href="https://www.amcharts.com/demos/combined-bullet-column-line-chart/">combined bullet column line chart</a>  
+    
 
 AmCharts for symfony
 Build your chart with twig and php only!

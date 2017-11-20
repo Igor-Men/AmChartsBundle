@@ -3,6 +3,7 @@
 namespace IK\AmChartsBundle\Charts;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use IK\AmChartsBundle\Charts\Components\AbstractListener;
 use IK\AmChartsBundle\Charts\Components\DataProvider;
 use IK\AmChartsBundle\Charts\Components\EventInterface;
@@ -10,6 +11,8 @@ use IK\AmChartsBundle\Charts\Components\Export;
 use IK\AmChartsBundle\Charts\Components\ListenerInterface;
 use IK\AmChartsBundle\Charts\Components\Theme;
 use IK\AmChartsBundle\Charts\DefaultConfigs\ChartDefaultInterface;
+use IK\AmChartsBundle\Helpers\CommendData;
+use IK\AmChartsBundle\Helpers;
 use Symfony\Component\Intl\Exception\NotImplementedException;
 
 abstract class AbstractChart implements ChartInterface, \JsonSerializable {
@@ -24,6 +27,8 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     protected $dataProvider;
     /** @var Export $export */
     protected $export;
+    /** @var  $commentData CommendData */
+    protected $commentData;
 
     protected $themeCustomString = '';
 
@@ -61,6 +66,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     }
 
     public function __construct() {
+        $this->commentData = new ArrayCollection();
         $this->generateId();
         $this->buildDefault();
     }
@@ -103,6 +109,23 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     protected function generateId() {
         $this->id = uniqid('id_', false);
     }
+
+    /**
+     * @return CommendData
+     */
+    public function getCommentData()
+    {
+        return $this->commentData;
+    }
+
+    /**
+     * @param CommendData $commentData
+     */
+    public function setCommentData($commentData)
+    {
+        $this->commentData = $commentData;
+    }
+
 
     /**
      * @param string['light','dark']  $nameName
