@@ -24,10 +24,14 @@ class CommendDataItem
     const TYPE_WARNING = 'warning';
     const TYPE_MESSAGE = 'message';
 
-    public function __construct()
+    public function __construct($message = '', $name = '', $type = self::TYPE_MESSAGE, $dataArray = [], $prefix = 'comment_item_id_')
     {
-        $this->dataArray = [];
-        $this->id = uniqid("comment_item_id_", false);
+        $this->message = $message;
+        $this->name = $name;
+        $this->type = $type;
+        $this->dataArray = $dataArray;
+
+        $this->id = uniqid($prefix, false);
     }
 
     /**

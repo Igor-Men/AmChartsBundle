@@ -66,7 +66,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     }
 
     public function __construct() {
-        $this->commentData = new ArrayCollection();
+        $this->commentData = new CommendData();
         $this->generateId();
         $this->buildDefault();
     }
