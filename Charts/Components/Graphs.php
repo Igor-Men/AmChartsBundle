@@ -67,4 +67,13 @@ class Graphs implements \JsonSerializable {
         }
         return $arr;
     }
+
+    public function getHelperFunctions() {
+        $arr = [];
+        /** @var Graph $graph */
+        foreach($this->graphs as $graph){
+            $arr = array_merge($arr, $graph->getHelperFunctions());
+        }
+        return $arr;
+    }
 }

@@ -16,7 +16,9 @@ class CombinedBulletColumnLineChart extends AbstractChart {
     protected $type;
     protected $dataDateFormat;
     protected $precision;
+    /** @var ValueAxes */
     protected $valueAxes;
+    /** @var Graphs */
     protected $graphs;
     protected $chartScrollbar;
     protected $chartCursor;
@@ -47,6 +49,14 @@ class CombinedBulletColumnLineChart extends AbstractChart {
         return $this->graphs;
     }
 
+    public function getHelperFunctions() {
+        $arr = [];
+        return array_merge(
+            $arr,
+            $this->graphs->getHelperFunctions(),
+            $this->valueAxes->getHelperFunctions()
+        );
+    }
     public function jsonSerialize(){
         return
             json_encode([

@@ -33,10 +33,14 @@ class Graph extends AbstractProperty {
     public $labelFunction;
     public $balloonFunction;
 
+    public function __construct($arrProps) {
+        $this->setArrProperties($arrProps);
+        $this->arrPropertyFunctionNames[] = 'balloonFunction';
+    }
+
     public function getLineAlpha() {
         return $this->lineAlpha;
     }
-
 
     public function setLineAlpha($lineAlpha) {
         $this->lineAlpha = $lineAlpha;
@@ -81,10 +85,6 @@ class Graph extends AbstractProperty {
     public function getValueAxis()
     {
         return $this->valueAxis;
-    }
-
-    public function __construct($arrProps) {
-        $this->setArrProperties($arrProps);
     }
 
     public function setId($id)

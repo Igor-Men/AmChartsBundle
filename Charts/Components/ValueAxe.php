@@ -3,7 +3,7 @@
 namespace IK\AmChartsBundle\Charts\Components;
 
 
-class ValueAxe implements  \JsonSerializable {
+class ValueAxe extends AbstractProperty implements  \JsonSerializable {
 
     public $id;
     public $title;
@@ -22,6 +22,7 @@ class ValueAxe implements  \JsonSerializable {
                 $this->{$property} = $value;
             }
         }
+        $this->arrPropertyFunctionNames[] = 'labelFunction';
     }
 
     public function setId($id)
@@ -49,36 +50,14 @@ class ValueAxe implements  \JsonSerializable {
         return (object)$arr;
     }
 
-    public function jsonSerialize() {
-
-        $arr = [];
-        foreach(get_object_vars($this) as $name => $value) {
-            if ($value !== null) {
-                $arr[$name] = $value;
-            }
-        }
-        return $arr;
-    }
-
     public function getLabelFunction()
     {
-        $js = $this->labelFunction;
-        if (!$js) {
-            return '';
-        }
-        $js = preg_replace_callback("/(>>>)(.*?)(\<\<\<)/i", function($matches){
-            $str_inner = $matches[2];
-            $str_inner =  str_replace("\\\"", "\"", $str_inner);
-            return $str_inner;
-        },$js);
-        return $js;
+        return $this->labelFunction;
     }
 
     public function setLabelFunction($labelFunction)
     {
-        $labelFunction = str_replace('\"','\\\"',$labelFunction);
-        $result =  ">>>$labelFunction<<<";
-        $this->labelFunction = $result;
+        $this->labelFunction = $labelFunction;
     }
 
 }

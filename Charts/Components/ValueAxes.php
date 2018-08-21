@@ -36,6 +36,15 @@ class ValueAxes implements \JsonSerializable {
         return $result->first();
     }
 
+    public function getHelperFunctions() {
+        $arr = [];
+        /** @var ValueAxe $object */
+        foreach($this->valueAxes as $object){
+            $arr = array_merge($arr, $object->getHelperFunctions());
+        }
+        return $arr;
+    }
+
     public function jsonSerialize() {
         $arr = [];
         /** @var ValueAxe $object */
@@ -44,4 +53,5 @@ class ValueAxes implements \JsonSerializable {
         }
         return $arr;
     }
+
 }

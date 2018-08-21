@@ -195,7 +195,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         $js = preg_replace_callback("/(function[^\}]*?)(\})/m", function($matches){
             $str = $matches[0];
             $str = str_replace('\"','\\\"',$str);
-            return json_encode(">>>$str<<<");
+            return json_encode($str);
         },$js);
 
         $objStd = json_decode($js);
@@ -223,7 +223,7 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
     {
         return "});\n";
     }
-    protected function postJsonProcess($strJs) {
+    protected function postJsonProcess($strJs, $postScriptFunctions) {
         //return $strJs;
         $unescepedJsFunctions = preg_replace_callback("/(\">>>)(.*?)(\<\<\<\")/i", function($matches){
             $str_inner = $matches[2];
@@ -232,6 +232,10 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
             $str_inner =  str_replace("\\/", "/", $str_inner);
             return str_replace("\/\\", "\\", $str_inner);
         },$strJs);
+
+        foreach ($postScriptFunctions as $nameFunc => $strringFunc) {
+            $unescepedJsFunctions = preg_replace('/"'.$nameFunc.'"/i', $nameFunc, $unescepedJsFunctions);
+        }
         return $unescepedJsFunctions;
     }
 
@@ -239,10 +243,25 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         return $this->type."_".$this->getId();
     }
 
+    protected function renderHelperFunctions($helperFunctions) {
+        $str = '';
+
+        foreach ($helperFunctions as $nameFunc => $bodyFunc) {
+            if (!$bodyFunc) {
+                continue;
+            }
+
+            $str .= preg_replace('/function/i', 'function '.$nameFunc, $bodyFunc). ';';
+        }
+        return $str;
+    }
+
     public function render()
     {
         $serialized = $this->jsonSerialize();
-        $sctipt_string = $this->postJsonProcess($serialized);
+        $helperFunctions = $this->getHelperFunctions();
+
+        $sctipt_string = $this->postJsonProcess($serialized, $helperFunctions);
 
         $chartJS = $this->renderStartIIFE();
 
@@ -251,6 +270,8 @@ abstract class AbstractChart implements ChartInterface, \JsonSerializable {
         $chartJS .= $sctipt_string;
 
         $chartJS .= ");\n";
+
+        $chartJS .= $this->renderHelperFunctions($helperFunctions);
 
         $chartJS .= $this->renderEndIIFE();
 
