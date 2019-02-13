@@ -5,3 +5,10 @@
 - finish StackedBarChartWithNegativeValues
 
 - create some phpunit tests.
+
+git push --delete origin 1.0.x-dev
+git tag -d 1.0.x-dev
+
+git tag -a v1.0.9 -m 'my version v1.0.9'
+git tag -a 1.0.x-dev -m 'my version 1.0.x-dev'
+
