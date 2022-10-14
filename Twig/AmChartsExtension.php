@@ -1,6 +1,10 @@
 <?php
 namespace IK\AmChartsBundle\Twig;
 
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+
 use IK\AmChartsBundle\Charts\ChartInterface;
 
 class AmChartsExtension extends \Twig_Extension
@@ -8,7 +12,7 @@ class AmChartsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('amchart', array($this, 'renderAmChart'), array('is_safe' => array('html'))),
+            new TwigFunction('amchart', array($this, 'renderAmChart'), array('is_safe' => array('html'))),
         );
     }
 
