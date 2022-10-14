@@ -7,7 +7,7 @@ use Twig\TwigFunction;
 
 use IK\AmChartsBundle\Charts\ChartInterface;
 
-class AmChartsExtension extends \Twig_Extension
+class AmChartsExtension extends AbstractExtension
 {
     public function getFunctions()
     {
