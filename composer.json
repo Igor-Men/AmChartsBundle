@@ -14,7 +14,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.0.8|>=8.1",
-        "symfony/framework-bundle": "^3.4 || ^4.2",
+        "symfony/framework-bundle": "^3.4 || ^4.2 || ^5.4",
         "twig/twig": "^3.0"
     },
     "autoload": {
@@ -25,7 +25,7 @@
     "target-dir": "IK/AmChartsBundle",
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-master": "3.0.x-dev"
         }
     }
 }
